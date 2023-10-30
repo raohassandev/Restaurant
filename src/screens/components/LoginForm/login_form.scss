@@ -1,0 +1,39 @@
+@import "../../../App.scss";
+
+.login_container {
+  max-width: 600px;
+  min-width: 600px;
+}
+
+.title {
+  color: $primary-color;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.register_link {
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .login_container {
+    padding: 16px;
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+@media screen and (max-width: 560px) {
+  .login_container {
+    padding: 16px;
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .login_container {
+    padding: 16px;
+    min-width: 330px;
+    max-width: 330px;
+  }
+}
+

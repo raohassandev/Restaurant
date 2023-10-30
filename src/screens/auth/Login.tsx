@@ -1,19 +1,11 @@
-import { Box, Button, Icon, Input, Text } from "components";
-import React from "react";
+import { Box } from "components";
 import { LoginForm } from "screens/components";
 
 export const Login = () => {
-  const handleClick = () => console.log("Button Clicked");
+  const handleClick = (data: LoginData) => console.log(data);
   return (
-    <Box
-      horizontalArrangement="center"
-      fullHeight
-      // verticalArrangement="space-between"
-      // style={{ backgroundColor: "lightblue" }}
-    >
-      <Text variant="h1">Login</Text>
-
-      <LoginForm />
+    <Box horizontal="center" fullHeight>
+      <LoginForm onSubmit={handleClick} />
     </Box>
   );
 };

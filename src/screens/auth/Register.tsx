@@ -1,8 +1,12 @@
-import React from 'react'
+import { Box } from "components";
+import { RegistrationForm } from "screens/components";
 
 export const Register = () => {
-  return (
-    <div>Register</div>
-  )
-}
+  const handleClick = (data: RegisterData) => console.log(data);
 
+  return (
+    <Box horizontal="center" fullHeight>
+      <RegistrationForm onSubmit={handleClick} />
+    </Box>
+  );
+};

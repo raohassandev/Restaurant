@@ -38,3 +38,12 @@ export const AppRouter = () => {
     </div>
   );
 };
+
+export const RouteName = {
+  auth: {
+    login: "/login",
+    register: "/register",
+  },
+  vendor: {},
+  buyer: {},
+};
