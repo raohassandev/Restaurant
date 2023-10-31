@@ -12,7 +12,7 @@ type ButtonProps = {
   spread?: boolean;
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   icon,
   label,
   leftIcon,
@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   style,
   spread,
-}) => {
+}: ButtonProps) => {
   const buttonStyle: React.CSSProperties = {
     color: "white",
     fontWeight: "bold",

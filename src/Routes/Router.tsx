@@ -1,49 +1,60 @@
-import { Login, Register } from "screens/auth";
+import { Dashboard, FoodCard, Login, Register, Restaurants, VendorOrders, VendorProfile } from "screens";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-// import AllFoods from "../pages/AllFoods";
-// import BuyerOrders from "../pages/buyer/Order/BuyerOrders";
-// import BuyerProfile from "../pages/profile/BuyerProfile";
-// import Cart from "../pages/buyer/Cart/Cart";
-// import Checkout from "../pages/Checkout";
-// import Contact from "../pages/Contact";
-// import FoodCard from "../pages/buyer/FoodCard/FoodCard";
-// import FoodDetails from "../pages/vendor/FoodDetails/FoodDetails";
-// import Home from "../pages/vendor/RestaurantDetails/RestaurantDetails";
-// import Login from "../pages/auth/Login";
-// import Register from "../pages/auth/Register";
-// import { Restaurant } from "../pages/vendor/Restaurant/Restaurant";
-// import VendorHome from "../pages/vendor/VendorHome/VendorHome";
-// import VendorOrders from "../pages/vendor/VendorOrder/VendorOrders";
-// import { getRestaurantsByVenodrThunkAction } from "../store/thunk/restaurantThunkActions";
+import { RootState } from "types/store";
+import { useSelector } from "react-redux";
 
 export const AppRouter = () => {
-  //   const dispatch = useDispatch();
-  //   const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
+  if (!user) {
+    return (
+      <div>
+        <Routes>
+          <Route path={rn.home} element={<Navigate to={rn.auth.login} />} />
+          <Route path={rn.auth.login} element={<Login />} />
+          <Route path={rn.auth.register} element={<Register />} />
+        </Routes>
+      </div>
+    );
+  }
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       await dispatch(getRestaurantsByVenodrThunkAction(user.id));
-  //     })();
-  //     return () => {};
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, []);
+  if (user && user.isVendor) {
+    return (
+      <div>
+        <Routes>
+          <Route path={rn.home} element={<Navigate to={rn.vendor.restaurant} />} />
+          <Route path={rn.vendor.dashboard} element={<Dashboard />} />
+          <Route path={rn.vendor.restaurant} element={<Restaurants />} />
+          <Route path={rn.vendor.vendorOrder} element={<VendorOrders />} />
+          <Route path={rn.vendor.vendorProfile} element={<VendorProfile />} />
+        </Routes>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Navigate to={"/login"} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path={rn.home} element={<Navigate to={rn.buyer.foodcard} />} />
+        <Route path={rn.buyer.foodcard} element={<FoodCard />} />
       </Routes>
     </div>
   );
 };
 
-export const RouteName = {
+export const rn = {
+  home: "/",
   auth: {
     login: "/login",
     register: "/register",
   },
-  vendor: {},
-  buyer: {},
+  vendor: {
+    dashboard: "/dashboard",
+    restaurant: "/restaurant",
+    vendorOrder: "/vendororder",
+    vendorProfile: "/vendorprofile",
+  },
+  buyer: {
+    foodcard: "/foodcard",
+  },
 };

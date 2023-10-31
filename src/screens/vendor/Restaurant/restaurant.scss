@@ -1,0 +1,14 @@
+@import '../../../App.scss';
+.restaurant_card{
+    background-color: $secondary-color;
+    border-radius: 10px;
+
+}
+.restaurant_img {
+    width: 150px;
+}
+.restaurant_detail_container {
+    background-color: lightblue;
+    min-width: 250px;
+    
+}

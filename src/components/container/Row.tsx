@@ -9,6 +9,7 @@ interface RowProps {
   vertical?: "start" | "center" | "end" | "space-between" | "space-around";
   fullWidth?: boolean;
   style?: React.CSSProperties;
+  wrap?: boolean;
 }
 /**
  *
@@ -17,15 +18,17 @@ interface RowProps {
  * @param fullWidth: Optional - Spreed The row to full width of the container.
  * @param horizontal: Optional - Horizontal arrangement of the row content. Like "start" | "center" | "end" | "space-between" | "space-around";
  * @param vertical: Optional - Vertical allignment of the row. Like "start" | "center" | "end" | "space-between" | "space-around";
- * @param styel:  Optional - styles of the row.
+ * @param style:  Optional - styles of the row.
+ * @param wrap: Wrap the content
  * @returns
  */
-export const Row: React.FC<RowProps> = ({ children, className, fullWidth, horizontal, vertical, style }) => {
+export const Row: React.FC<RowProps> = ({ children, className, fullWidth, horizontal, vertical, style, wrap }) => {
   const rowStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: horizontal,
     alignItems: vertical,
     width: fullWidth ? "100%" : "auto",
+    flexWrap: wrap ? "wrap" : "nowrap",
     ...style,
   };
   return (
