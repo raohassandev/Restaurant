@@ -1,20 +1,22 @@
-import './restaurant.scss'
+import "./restaurant.scss";
 
 import { AppDispatch, RootState } from "types/store";
-import { Box, Row, Text } from "components";
+import { Box, Icon, Row, Text } from "components";
 import { useDispatch, useSelector } from "react-redux";
 
 import React from "react";
 import { getRestaurantsByVenodrThunkAction } from "store";
+import { routeNames } from "routes";
+import { useNavigate } from "react-router-dom";
 
 export const Restaurants = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.auth);
   const { restaurants }: RestaurantSlice = useSelector((state: RootState) => state.restaurant);
+
   React.useEffect(() => {
     (async () => {
-      const res = await dispatch(getRestaurantsByVenodrThunkAction(user.id));
-      console.log(res);
+      await dispatch(getRestaurantsByVenodrThunkAction(user.id));
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -31,22 +33,41 @@ interface Props {
   restaurant: Restaurant;
 }
 const RestaurantCard = ({ restaurant }: Props) => {
+  const navigate = useNavigate();
   return (
-    <Row horizontal="center" wrap className="restaurant_card">
-      <Box>
-        <img src={restaurant.imageUrl} alt="imageUrl" className="restaurant_img" />
+    <div style={{ position: "relative" }}>
+      <Row
+        horizontal="center"
+        wrap
+        className="restaurant_card"
+        onClick={() => navigate(routeNames.vendor.restaurantDetails)}>
+        <Box>
+          <img src={restaurant.imageUrl} alt="imageUrl" className="restaurant_img" />
+        </Box>
+        <Box className="restaurant_detail_container">
+          <Text className="h2 name">{restaurant.name}</Text>
+          <Text className="">{restaurant.desc}</Text>
+          <Text className="h3">Contact</Text>
+          <Row horizontal="space-between" fullWidth wrap>
+            <Text className="me-3">{restaurant.contact1}</Text>
+            <Text className="me-3">{restaurant.contact2}</Text>
+            <Text className="me-3">{restaurant.contact3}</Text>
+          </Row>
+        </Box>
+      </Row>
+      <Box className="cp">
+        <Icon
+          name="edit"
+          size={30}
+          onClick={() => {
+            console.log("edit");
+            alert("Edit button clicked");
+          }}
+          className="icon"
+        />
+        <Icon name="trash" size={30} onClick={() => alert("Delete button clicked")} />
       </Box>
-      <Box className="restaurant_detail_container">
-        <Text className="h2">{restaurant.name}</Text>
-        <Text className="">{restaurant.desc}</Text>
-        <Text className="h2">Contact</Text>
-        <Row horizontal="space-between" fullWidth wrap>
-          <Text className="me-3">{restaurant.contact1}</Text>
-          <Text className="me-3">{restaurant.contact2}</Text>
-          <Text className="me-3">{restaurant.contact3}</Text>
-        </Row>
-      </Box>
-    </Row>
+    </div>
   );
 };
 

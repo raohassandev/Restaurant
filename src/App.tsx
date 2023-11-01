@@ -6,18 +6,23 @@ import { AppRouter } from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import React from "react";
+import { VendorNavBar } from "components";
 
-function App() {
+const Layout = () => (
+  <BrowserRouter>
+    <VendorNavBar />
+    <AppRouter />
+  </BrowserRouter>
+);
+
+const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
+        <Layout />
       </PersistGate>
     </Provider>
   );
-}
+};
 
 export default App;

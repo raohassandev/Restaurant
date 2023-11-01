@@ -1,8 +1,35 @@
-import { Dashboard, FoodCard, Login, Register, Restaurants, VendorOrders, VendorProfile } from "screens";
+import {
+  Dashboard,
+  FoodCard,
+  Login,
+  Register,
+  RestaurantDetails,
+  Restaurants,
+  VendorOrders,
+  VendorProfile,
+} from "screens";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { RootState } from "types/store";
 import { useSelector } from "react-redux";
+
+export const routeNames = {
+  home: "/",
+  auth: {
+    login: "/login",
+    register: "/register",
+  },
+  vendor: {
+    dashboard: "/dashboard",
+    restaurant: "/restaurant",
+    restaurantDetails: "/restaurantdetail",
+    vendorOrder: "/vendororder",
+    vendorProfile: "/vendorprofile",
+  },
+  buyer: {
+    foodcard: "/foodcard",
+  },
+};
 
 export const AppRouter = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -10,9 +37,9 @@ export const AppRouter = () => {
     return (
       <div>
         <Routes>
-          <Route path={rn.home} element={<Navigate to={rn.auth.login} />} />
-          <Route path={rn.auth.login} element={<Login />} />
-          <Route path={rn.auth.register} element={<Register />} />
+          <Route path={routeNames.home} element={<Navigate to={routeNames.auth.login} />} />
+          <Route path={routeNames.auth.login} element={<Login />} />
+          <Route path={routeNames.auth.register} element={<Register />} />
         </Routes>
       </div>
     );
@@ -22,11 +49,12 @@ export const AppRouter = () => {
     return (
       <div>
         <Routes>
-          <Route path={rn.home} element={<Navigate to={rn.vendor.restaurant} />} />
-          <Route path={rn.vendor.dashboard} element={<Dashboard />} />
-          <Route path={rn.vendor.restaurant} element={<Restaurants />} />
-          <Route path={rn.vendor.vendorOrder} element={<VendorOrders />} />
-          <Route path={rn.vendor.vendorProfile} element={<VendorProfile />} />
+          <Route path={routeNames.home} element={<Navigate to={routeNames.vendor.restaurant} />} />
+          <Route path={routeNames.vendor.dashboard} element={<Dashboard />} />
+          <Route path={routeNames.vendor.restaurant} element={<Restaurants />} />
+          <Route path={routeNames.vendor.restaurantDetails} element={<RestaurantDetails />} />
+          <Route path={routeNames.vendor.vendorOrder} element={<VendorOrders />} />
+          <Route path={routeNames.vendor.vendorProfile} element={<VendorProfile />} />
         </Routes>
       </div>
     );
@@ -35,26 +63,9 @@ export const AppRouter = () => {
   return (
     <div>
       <Routes>
-        <Route path={rn.home} element={<Navigate to={rn.buyer.foodcard} />} />
-        <Route path={rn.buyer.foodcard} element={<FoodCard />} />
+        <Route path={routeNames.home} element={<Navigate to={routeNames.buyer.foodcard} />} />
+        <Route path={routeNames.buyer.foodcard} element={<FoodCard />} />
       </Routes>
     </div>
   );
-};
-
-export const rn = {
-  home: "/",
-  auth: {
-    login: "/login",
-    register: "/register",
-  },
-  vendor: {
-    dashboard: "/dashboard",
-    restaurant: "/restaurant",
-    vendorOrder: "/vendororder",
-    vendorProfile: "/vendorprofile",
-  },
-  buyer: {
-    foodcard: "/foodcard",
-  },
 };

@@ -2,13 +2,39 @@
 .restaurant_card{
     background-color: $secondary-color;
     border-radius: 10px;
-
+    padding: 0px;
+    position: relative;
 }
 .restaurant_img {
     width: 150px;
+    // border: 1px solid;    
+    margin-right: -16px;
 }
 .restaurant_detail_container {
-    background-color: lightblue;
-    min-width: 250px;
-    
+    // background-color: lightblue;
+    // min-width: 200px;
+    padding: 0px
+}
+.name{
+color: $primary-color;
+}
+.cp {
+    position:absolute;
+    // background-color: rgb(168, 168, 224);
+    top: 0;
+    right:0;
+    padding-right: 0;;
+    border-radius:  5px;
+    z-index: 40;
+
+}
+.icon{
+  margin-right:  -10px;
+  margin-top:  -10px;
+}
+@media screen and (max-width: 768px) {
+  .restaurant_detail_container {
+    width: 100%;
+
+  }
 }

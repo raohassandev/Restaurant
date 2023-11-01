@@ -29,7 +29,7 @@ interface BoxProps {
 
 export const Box: React.FC<BoxProps> = ({
   children,
-  margin = 16,
+  margin = 8,
   padding = 8,
   horizontal = "start",
   vertical = "start",
@@ -43,7 +43,7 @@ export const Box: React.FC<BoxProps> = ({
     flexDirection: "column",
     margin: margin && typeof margin === "number" ? `${margin}px` : margin,
     padding: padding && typeof padding === "number" ? `${padding}px` : padding,
-    borderRadius: 10,
+    borderRadius: 5,
     ...style,
   };
   const innerContainerStyles: CSSProperties = {

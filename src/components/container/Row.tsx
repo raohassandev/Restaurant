@@ -10,6 +10,7 @@ interface RowProps {
   fullWidth?: boolean;
   style?: React.CSSProperties;
   wrap?: boolean;
+  onClick?: () => void;
 }
 /**
  *
@@ -20,9 +21,10 @@ interface RowProps {
  * @param vertical: Optional - Vertical allignment of the row. Like "start" | "center" | "end" | "space-between" | "space-around";
  * @param style:  Optional - styles of the row.
  * @param wrap: Wrap the content
+ * @param onClick: Row area click handler.
  * @returns
  */
-export const Row: React.FC<RowProps> = ({ children, className, fullWidth, horizontal, vertical, style, wrap }) => {
+export const Row: React.FC<RowProps> = ({ children, className, fullWidth, horizontal, vertical, style, wrap, onClick }) => {
   const rowStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: horizontal,
@@ -32,7 +34,7 @@ export const Row: React.FC<RowProps> = ({ children, className, fullWidth, horizo
     ...style,
   };
   return (
-    <div className={`${className}`} style={rowStyle}>
+    <div className={`${className}`} style={rowStyle} onClick={onClick}>
       {children}
     </div>
   );
