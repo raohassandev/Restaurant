@@ -2,7 +2,7 @@ import "./App.scss";
 
 import { persistor, store } from "store";
 
-import { AppRouter } from "./routes";
+import { AppRouterComponent } from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
@@ -11,7 +11,7 @@ import { VendorNavBar } from "components";
 const Layout = () => (
   <BrowserRouter>
     <VendorNavBar />
-    <AppRouter />
+    <AppRouterComponent />
   </BrowserRouter>
 );
 

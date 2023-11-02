@@ -1,27 +1,23 @@
+import { Ellipsis } from "react-css-spinners";
 import React from "react";
-
-type ButtonProps = {
+export interface ButtonProps {
   label?: string;
-  icon?: React.ReactNode;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
   isLoading?: boolean;
   disabled?: boolean;
   onClick?: () => void;
   style?: React.CSSProperties;
-  spread?: boolean;
-};
+  spread?: boolean; // width 100%
+  children?: React.ReactNode;
+}
 
 export const Button = ({
-  icon,
   label,
-  leftIcon,
-  rightIcon,
   isLoading = false,
   disabled = false,
   onClick,
   style,
   spread,
+  children,
 }: ButtonProps) => {
   const buttonStyle: React.CSSProperties = {
     color: "white",
@@ -34,26 +30,22 @@ export const Button = ({
       style={
         spread
           ? { display: "d-flex w-100", justifyContent: "center", alignItems: "center" }
-          : { justifyContent: "center", alignSelf: "center" }
+          : { display: "flex", justifyContent: "center", alignItems: "center" }
       }>
       <button
         className={`btn btn-primary ${spread ? "p-3 d-flex  w-100 " : ""}${isLoading ? "disabled" : ""}`}
         style={buttonStyle}
         onClick={!isLoading && !disabled ? onClick : undefined}>
-        {icon ? (
-          <span className="m-1">{icon}</span>
-        ) : (
-          <div>
-            {leftIcon && <span className="me-2">{leftIcon}</span>}
-            {isLoading && (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            )}
-            {label && <div>{label}</div>}
-            {rightIcon && <span className="ms-2">{rightIcon}</span>}
-          </div>
-        )}
+        <div>
+          {children ? (
+            children
+          ) : (
+            <div>
+              {isLoading && <Ellipsis color="red" />}
+              {label && <div>{label}</div>}
+            </div>
+          )}
+        </div>
       </button>
     </div>
   );

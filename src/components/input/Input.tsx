@@ -8,17 +8,29 @@ interface Props {
   style?: React.CSSProperties;
   label?: string;
   value: string;
+  placeholder?: string;
   onChange: (text: string) => void;
 }
-export const Input = ({ type, className, style, value, label, onChange }: Props) => {
+/**
+ *
+ * @param type requird type of input used for. Like "number" | "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "password" | "radio" | "range" | "reset" | "search".
+ * @param className optional CSS style for Input
+ * @param style optional CSS Style object.
+ * @param label optional label for inptut.
+ * @param value required value of the input.
+ * @param placeholer optional Place holder.
+ * @param onChange required text change handler.
+ * @returns
+ */
+export const Input = ({ type, className, style, value, label, placeholder, onChange }: Props) => {
   const inputStyle = { width: "100%", ...style };
   return (
     <div className="d-flex form-floating input_container">
       <input
         type={type}
-        value={value}
+        value={value||undefined}
         className={`d-flex form-control w-100 ${className}`}
-        placeholder={label}
+        placeholder={placeholder || label}
         style={inputStyle}
         onChange={(e) => onChange(e.target.value)}
       />

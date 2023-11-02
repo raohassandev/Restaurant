@@ -3,7 +3,7 @@ import "./navbar.scss";
 import { Icon, IconName } from "components/icons/Icon";
 
 import { NavLink } from "react-router-dom";
-import { routeNames } from "routes";
+import { Text } from "components/text/Text";
 import { useState } from "react";
 
 interface Props {
@@ -24,9 +24,8 @@ function NavBar({ imageUrl, name, navlinks }: Props) {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink to="/" className="nav-logo">
-            {/* <img src="http://localhost:4000/uploads/1698766781419bread.png" alt="" className="logo_img" /> */}
             <img src={imageUrl} alt="" className="logo_img" />
-            <span>{name}</span>
+            <Text className="title">{name}</Text>
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -62,19 +61,19 @@ function NavBar({ imageUrl, name, navlinks }: Props) {
 const vendorNavlinks = [
   {
     name: "Home",
-    path: routeNames.home,
+    path: "/",
   },
   {
     name: "Restaurants",
-    path: routeNames.vendor.restaurant,
+    path: "/restaurant",
   },
   {
     name: "Orders",
-    path: routeNames.vendor.vendorOrder,
+    path: "/vendororder",
   },
   {
     name: "Profile",
-    path: routeNames.vendor.vendorProfile,
+    path: "/vendorprofile",
   },
 ];
 

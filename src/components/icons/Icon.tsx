@@ -14,7 +14,7 @@ export const IconName = {
   menu: "menu",
   menu_fold: "menu_fold",
   menu_unfold: "menu_unfold",
-  notification: "notification"
+  notification: "notification",
 };
 
 interface Props {
@@ -28,7 +28,6 @@ interface Props {
 }
 
 export const Icon = (props: Props) => {
-  console.log(typeof props)
   const { name, className, onClick } = props;
   const iconStyle = `icon box-with-shadow ${className}`;
   return (

@@ -36,3 +36,24 @@ interface Restaurant {
   contact3: string;
   imageUrl: string;
 }
+
+interface Category {
+  id: string;
+  vendorId: string;
+  restaurantId: string;
+  name: string;
+  desc: string;
+  imageUrl: string;
+}
+
+interface Dish {
+  id: string;
+  categoryId: string;
+  vendorId: string;
+  restaurantId: string;
+  name: string;
+  desc: string;
+  price: number;
+  time: string;
+  imageUrl: string;
+}
