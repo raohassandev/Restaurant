@@ -1,13 +1,18 @@
+import React, { useState } from "react";
+
 import { Ellipsis } from "react-css-spinners";
-import React from "react";
+
 export interface ButtonProps {
-  label?: string;
-  isLoading?: boolean;
+  variant?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   style?: React.CSSProperties;
   spread?: boolean; // width 100%
   children?: React.ReactNode;
+  isLoading?: boolean;
+  label?: string;
 }
 
 export const Button = ({
@@ -15,38 +20,48 @@ export const Button = ({
   isLoading = false,
   disabled = false,
   onClick,
+  variant,
+  size,
+  type,
   style,
   spread,
   children,
 }: ButtonProps) => {
-  const buttonStyle: React.CSSProperties = {
-    color: "white",
-    fontWeight: "bold",
-    justifyContent: "center",
-    ...style,
+  const [isActive, setIsActive] = useState(false);
+
+  const handleOnClick = () => {
+    setIsActive(true);
+    if (onClick) {
+      onClick();
+    }
   };
+
+  const className = ["btn"];
+  if (variant) {
+    className.push(`btn-${variant}`);
+  }
+  if (size) {
+    className.push(`btn-${size}`);
+  }
+  if (disabled) {
+    className.push("disabled");
+  }
+  if (type) {
+    className.push(`btn-${type}`);
+  }
+  if (spread) {
+    className.push(`btn-block`);
+  }
+
   return (
-    <div
-      style={
-        spread
-          ? { display: "d-flex w-100", justifyContent: "center", alignItems: "center" }
-          : { display: "flex", justifyContent: "center", alignItems: "center" }
-      }>
-      <button
-        className={`btn btn-primary ${spread ? "p-3 d-flex  w-100 " : ""}${isLoading ? "disabled" : ""}`}
-        style={buttonStyle}
-        onClick={!isLoading && !disabled ? onClick : undefined}>
-        <div>
-          {children ? (
-            children
-          ) : (
-            <div>
-              {isLoading && <Ellipsis color="red" />}
-              {label && <div>{label}</div>}
-            </div>
-          )}
-        </div>
-      </button>
-    </div>
+    <button
+      className={className.join(" ")}
+      disabled={disabled}
+      onClick={handleOnClick}
+      aria-disabled={disabled}
+      aria-pressed={isActive}
+      style={style}>
+      {children || label}
+    </button>
   );
 };

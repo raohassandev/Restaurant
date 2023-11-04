@@ -10,7 +10,8 @@ export const ModelButton = (props: Props) => {
   const { label } = props;
   return (
     <Button label="df">
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target={props.target}>
         {label}
       </button>
       {/* <Model>{children}</Model> */}
