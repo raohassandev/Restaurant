@@ -3,7 +3,7 @@ import { getDishCategoriesByRestaurantThunkAction } from "../thunk/dishCategoryT
 
 const dishCategorySlice = createSlice({
   name: "dishCategory",
-  initialState: { loading: false, error: null, count: null, disCategories: null },
+  initialState: { loading: false, error: null, count: null, dishCategories: null },
   reducers: {},
   extraReducers: (builder) => {
     // Get All category by resaurant
@@ -12,14 +12,14 @@ const dishCategorySlice = createSlice({
     });
     builder.addCase(getDishCategoriesByRestaurantThunkAction.fulfilled, (state, action) => {
       state.count = action.payload.data.count;
-      state.disCategories = action.payload.data.rows;
+      state.dishCategories = action.payload.data.rows;
       state.loading = false;
-        state.error = null;
+      state.error = null;
     });
     builder.addCase(getDishCategoriesByRestaurantThunkAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
-      console.log(action.payload)
+      console.log(action.payload);
     });
   },
 });

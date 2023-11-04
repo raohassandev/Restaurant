@@ -1,6 +1,5 @@
-import { getRestaurantsByIdThunkAction, getRestaurantsByVenodrThunkAction } from "../thunk/restaurantThunkActions";
-
 import { createSlice } from "@reduxjs/toolkit";
+import { getRestaurantsByVenodrThunkAction } from "../thunk/restaurantThunkActions";
 
 const restaurantSlice = createSlice({
   name: "restaurant",

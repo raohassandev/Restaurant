@@ -1,9 +1,9 @@
 import { Box, Button, Dropdown, Input, Text } from "components";
 import { useEffect, useState } from "react";
 
-import React from "react";
-import { RootState } from "types/store";
-import { useSelector } from "react-redux";
+// import React from "react";
+// import { RootState } from "types/store";
+// import { useSelector } from "react-redux";
 
 interface Props {
   dish?: Dish;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const DishForm = ({ dish, onSubmit }: Props) => {
-  const { currentRestaurant }: RestaurantSlice = useSelector((state: RootState) => state.restaurant);
+  // const { currentRestaurant }: RestaurantSlice = useSelector((state: RootState) => state.restaurant);
 
   const [newDish, setNewDish] = useState<Dish>({
     id: "",

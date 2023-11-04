@@ -12,6 +12,7 @@ interface BoxProps {
   fullHeight?: boolean;
   style?: CSSProperties;
   className?: string;
+  onClick?: () => void;
 }
 /**
  *
@@ -24,6 +25,7 @@ interface BoxProps {
  * @param horizontal: Optional - Horizontal arrangement of the row content. Like "start" | "center" | "end" | "space-between" | "space-around";
  * @param vertical: Optional - Vertical allignment of the row. Like "start" | "center" | "end" | "space-between" | "space-around";
  * @param styel:  Optional - styles of the row.
+ * @param onClick: Optional - box area click handler.
  * @returns
  */
 
@@ -37,6 +39,7 @@ export const Box: React.FC<BoxProps> = ({
   fullHeight = false,
   style = {},
   className,
+  onClick,
 }) => {
   const outerContainerStyles: CSSProperties = {
     display: "flex",
@@ -56,7 +59,7 @@ export const Box: React.FC<BoxProps> = ({
   };
 
   return (
-    <div style={outerContainerStyles} className={className}>
+    <div style={outerContainerStyles} className={className} onClick={onClick}>
       <div style={innerContainerStyles}>{children}</div>
     </div>
   );

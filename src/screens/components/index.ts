@@ -1,4 +1,5 @@
 export * from "./LoginForm/LoginForm";
 export * from "./RegistrationForm/RegistrationForm";
 export * from "./category/CategoryForm";
-export * from './dish/DishForm'
+export * from "./category/CategoryCard";
+export * from "./dish/DishForm";

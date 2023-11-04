@@ -20,6 +20,7 @@ interface User {
   createdAt: string;
   id: string;
   updatedAt: string;
+  isVendor: boolean;
 }
 
 interface Restaurant {
@@ -35,6 +36,7 @@ interface Restaurant {
   contact2: string;
   contact3: string;
   imageUrl: string;
+  vendorId: string;
 }
 
 interface Category {

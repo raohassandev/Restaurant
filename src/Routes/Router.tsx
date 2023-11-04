@@ -1,3 +1,4 @@
+import { AppDispatch, RootState } from "types/store";
 import {
   Dashboard,
   FoodCard,
@@ -9,30 +10,45 @@ import {
   VendorProfile,
 } from "screens";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { RootState } from "types/store";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { routeNames } from "./routeNames";
+import { syncCurrenrtRestaurantThunkAction } from "store";
+import { useEffect } from "react";
 
 export const AppRouterComponent = () => {
-  const routes = {
-    home: "/",
-    auth: {
-      login: "/login",
-      register: "/register",
-    },
-    vendor: {
-      dashboard: "/dashboard",
-      restaurant: "/restaurant",
-      restaurantDetails: "/restaurantdetail",
-      vendorOrder: "/vendororder",
-      vendorProfile: "/vendorprofile",
-    },
-    buyer: {
-      foodcard: "/foodcard",
-    },
-  };
+  const routes = routeNames;
+  // const routes = {
+  //   home: "/",
+  //   auth: {
+  //     login: "/login",
+  //     register: "/register",
+  //   },
+  //   vendor: {
+  //     dashboard: "/dashboard",
+  //     restaurant: "/restaurant",
+  //     restaurantDetails: "/restaurantdetail",
+  //     vendorOrder: "/vendororder",
+  //     vendorProfile: "/vendorprofile",
+  //   },
+  //   buyer: {
+  //     foodcard: "/foodcard",
+  //   },
+  // };
   const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    const sync = async () => {
+      dispatch(syncCurrenrtRestaurantThunkAction());
+    };
+    const interval = setInterval(sync, 30000);
+
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!user) {
     return (
       <div>

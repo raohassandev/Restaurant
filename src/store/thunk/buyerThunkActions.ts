@@ -6,7 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getBuyerOrdersThunkAction = createAsyncThunk(
   "getBuyerOrdersThunkAction",
-  async (buyerId, { rejectWithValue, getState }): Promise<any> => {
+  async (buyerId: string, { rejectWithValue, getState }): Promise<any> => {
     try {
       const token = (getState() as RootState).auth.token;
       const config = axiosConfig(token);
@@ -24,7 +24,7 @@ export const getBuyerOrdersThunkAction = createAsyncThunk(
 
 export const getRestaurantFoodCardThunkAction = createAsyncThunk(
   "getRestaurantFoodCardThunkAction",
-  async (restaurantId, { rejectWithValue }) => {
+  async (restaurantId: string, { rejectWithValue }) => {
     try {
       const config = axiosConfig();
       const body = JSON.stringify({ restaurantId });

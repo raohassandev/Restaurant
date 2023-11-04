@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Ellipsis } from "react-css-spinners";
+// import { Ellipsis } from "react-css-spinners";
 
 export interface ButtonProps {
   variant?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
@@ -20,7 +20,7 @@ export const Button = ({
   isLoading = false,
   disabled = false,
   onClick,
-  variant,
+  variant = "primary",
   size,
   type,
   style,

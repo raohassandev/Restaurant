@@ -7,18 +7,23 @@ import { useSelector } from "react-redux";
 
 interface Props {
   category?: Category;
-  onSubmit: (category: Category) => void;
+  onSubmit: (data: FormData) => void;
+}
+
+interface CategoryState extends Category {
+  image?: any;
 }
 export const CategoryForm = ({ category, onSubmit }: Props) => {
   const { currentRestaurant }: RestaurantSlice = useSelector((state: RootState) => state.restaurant);
 
-  const [cat, setCat] = useState<Category>({
+  const [cat, setCat] = useState<CategoryState>({
     id: "",
-    vendorId: "",
+    vendorId: currentRestaurant.vendorId,
     restaurantId: currentRestaurant ? currentRestaurant.id : "",
     name: "",
     desc: "",
     imageUrl: "",
+    image: {}
   });
 
   useEffect(() => {
@@ -28,8 +33,23 @@ export const CategoryForm = ({ category, onSubmit }: Props) => {
 
   const handleSubmit = () => {
     try {
-      console.log(cat);
-      onSubmit(cat);
+
+      if (!cat.image) {
+        alert("Image required.")
+        return;
+      }
+      
+      cat.vendorId = currentRestaurant.vendorId;
+      cat.restaurantId = currentRestaurant.id;
+      
+      const formData = new FormData();
+      formData.append("image", cat.image);
+      formData.append("name", cat.name);
+      formData.append("desc", cat.desc);
+      formData.append("vendorId", cat.vendorId);
+      formData.append("restaurantId", cat.restaurantId);
+
+      onSubmit(formData);
     } catch (error) {
       console.log(error);
     }
@@ -57,8 +77,8 @@ export const CategoryForm = ({ category, onSubmit }: Props) => {
         type="file"
         value={cat.imageUrl}
         label="Select thumbnail image"
-        onChange={function (text: string): void {
-          setCat({ ...cat, imageUrl: text });
+        onChange={function (file): void {
+          setCat({ ...cat, image: file }); // assigning image instead of image url
         }}
       />
       <Button label="Add Category" onClick={handleSubmit} />

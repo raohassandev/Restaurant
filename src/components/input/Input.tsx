@@ -9,7 +9,7 @@ interface Props {
   label?: string;
   value: string;
   placeholder?: string;
-  onChange: (text: string) => void;
+  onChange: (text: string | File) => void;
 }
 /**
  *
@@ -28,11 +28,11 @@ export const Input = ({ type, className, style, value, label, placeholder, onCha
     <div className="d-flex form-floating input_container">
       <input
         type={type}
-        value={value||undefined}
+        value={value || undefined}
         className={`d-flex form-control w-100 ${className}`}
         placeholder={placeholder || label}
         style={inputStyle}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(type === "file" ? e.target.files[0] : e.target.value)}
       />
       <label>{label}</label>
     </div>

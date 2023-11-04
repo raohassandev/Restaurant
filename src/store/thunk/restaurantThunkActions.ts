@@ -8,7 +8,7 @@ import { updateCurrentRestaurant } from "../features/restaurantSlice";
 
 export const addRestaurantsThunkAction = createAsyncThunk(
   "addRestaurant",
-  async (data, { rejectWithValue, getState, dispatch }) => {
+  async (data: Restaurant, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = (getState() as RootState).auth.token;
       const config = axiosConfig(token, true);
@@ -86,7 +86,7 @@ export const getRestaurantsByVenodrThunkAction = createAsyncThunk(
 );
 export const updateRestaurantThunkAction = createAsyncThunk(
   "updateReastaurant",
-  async (data, { rejectWithValue, getState, dispatch }) => {
+  async (data: Restaurant, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = (getState() as RootState).auth.token;
       const config = axiosConfig(token, true);
@@ -104,7 +104,7 @@ export const updateRestaurantThunkAction = createAsyncThunk(
 );
 export const deleteteRestaurantThunkAction = createAsyncThunk(
   "deleteReastaurant",
-  async (id, { rejectWithValue, getState, dispatch }) => {
+  async (id: string, { rejectWithValue, getState, dispatch }) => {
     try {
       const token = (getState() as RootState).auth.token;
       const config = axiosConfig(token);

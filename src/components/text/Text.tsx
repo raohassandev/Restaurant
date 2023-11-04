@@ -16,15 +16,20 @@
 import React from "react";
 
 type TextProps = {
-  variant?: "h1" | "h2" | "h3" | "body";
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body";
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
 };
 
 export const Text: React.FC<TextProps> = ({ variant = "body", children, className, onClick }) => {
+
+  const mergedClassName = [`typography typography-${variant}`];
+  if (className) { mergedClassName.push(className) }
+
   return (
-    <div className={`typography typography-${variant} ${className}`} onClick={() => onclick}>
+    // <div className={`typography typography-${variant} ${className}`} onClick={() => onclick}>
+    <div className={mergedClassName.join(" ")} onClick={() => onclick}>
       {children}
     </div>
   );
