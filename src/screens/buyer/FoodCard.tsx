@@ -12,12 +12,12 @@ export const FoodCard = () => {
     <div>
       <div>FoodCard</div>
       <Button
-        label="Logout"
         onClick={async () => {
           await dispatch(logout());
           navigate("/");
-        }}
-      />
+        }}>
+        Logout
+      </Button>
     </div>
   );
 };

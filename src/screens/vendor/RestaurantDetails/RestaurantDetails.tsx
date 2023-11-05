@@ -1,10 +1,9 @@
 import { AppDispatch, RootState } from "types/store";
-import { Box, ModelButton, Row, Text } from "components";
+import { Box, Button, Row, Text } from "components";
 import { CategoryCard, CategoryForm, DishForm } from "screens/components";
 import { addDishCategoryThunkAction, getDishCategoriesByRestaurantThunkAction } from "store";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // import BootStrapModal from "bootstrap/js/dist/modal";
 
@@ -14,16 +13,20 @@ export const RestaurantDetails = () => {
     categories: s.dishCategory.dishCategories,
     restaurant: s.restaurant.currentRestaurant,
   }));
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
+  const [showDishForm, setShowDishForm] = useState(false);
 
   const submitCategory = async (data: FormData) => {
     try {
-      await dispatch(addDishCategoryThunkAction(data));
+      // await dispatch(addDishCategoryThunkAction(data));
+      setShowCategoryForm(false);
     } catch (error) {
       console.log(error);
     }
   };
   const submitDish = (category: Category) => {
     // console.log(category);
+    setShowDishForm(false);
   };
   useEffect(() => {
     (async () => {
@@ -39,18 +42,15 @@ export const RestaurantDetails = () => {
     <Box fullWidth horizontal="center">
       <Text className="h1 text-primary">Restaurant</Text>
       <Row>
-        <Box>
-          <ModelButton label="Add Dish" target="#dishModal">
-            <DishForm onSubmit={submitDish} />
-          </ModelButton>
-        </Box>
-        <Box>
-          <ModelButton label="Add Category" target="#categoryModal">
-            <CategoryForm onSubmit={submitCategory} />
-          </ModelButton>
-        </Box>
+        <Button className="mx-1" onClick={() => setShowDishForm(true)}>
+          Add Dish
+        </Button>
+        <Button className="mx-1" onClick={() => setShowCategoryForm(true)}>
+          Add Category
+        </Button>
       </Row>
-
+      <CategoryForm onSubmit={submitCategory} isVisible={showCategoryForm} />
+      <DishForm onSubmit={submitDish} isVisible={showDishForm} />
       {categories &&
         categories.map((cat) => (
           <CategoryCard

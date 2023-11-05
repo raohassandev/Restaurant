@@ -38,7 +38,7 @@ export const LoginForm = ({ onSubmit }: Props) => {
           <Text className="text-primary h6">Register</Text>
         </Link>
       </Row>
-      <Button label="Login" onClick={() => onSubmit(state)} />
+      <Button onClick={() => onSubmit(state)}>Login</Button>
     </Box>
   );
 };

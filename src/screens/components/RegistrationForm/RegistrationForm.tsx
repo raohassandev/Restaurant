@@ -46,7 +46,7 @@ export const RegistrationForm = ({ onSubmit }: Props) => {
           <Text className="text-primary h6">Login</Text>
         </Link>
       </Row>
-      <Button label="Register" onClick={() => onSubmit(state)} />
+      <Button onClick={() => onSubmit(state)}>Register</Button>
     </Box>
   );
 };

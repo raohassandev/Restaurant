@@ -13,7 +13,6 @@ export const Restaurants = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.auth);
   const { restaurants }: RestaurantSlice = useSelector((state: RootState) => state.restaurant);
-
   React.useEffect(() => {
     (async () => {
       await dispatch(getRestaurantsByVenodrThunkAction(user.id));

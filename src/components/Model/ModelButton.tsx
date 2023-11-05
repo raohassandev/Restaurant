@@ -1,4 +1,4 @@
-import { Model, ModelProps } from "components/Model/Model";
+import { Model, ModelProps } from "components/Model/OldModel";
 
 interface Props extends ModelProps {
   label: string;
